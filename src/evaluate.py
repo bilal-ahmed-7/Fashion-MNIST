@@ -1,5 +1,19 @@
+import os
+import warnings
+
+os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
+os.environ["TF_ENABLE_ONEDNN_OPTS"] = "0"
+warnings.filterwarnings("ignore")
+
+import logging
+import absl.logging
+
+absl.logging.set_verbosity(absl.logging.ERROR)
+logging.getLogger("tensorflow").setLevel(logging.ERROR)
+
 import json
 import numpy as np
+import keras
 import tensorflow as tf
 import matplotlib.pyplot as plt
 from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
@@ -8,7 +22,7 @@ def evaluate():
     data = np.load("data/processed/data.npz")
     x_test, y_test = data["x_test"], data["y_test"]
 
-    model = tf.keras.models.load_model("models/model.h5")
+    model = keras.models.load_model("models/model.keras")
     test_loss, test_acc = model.evaluate(x_test, y_test, verbose=0)
 
     metrics = {

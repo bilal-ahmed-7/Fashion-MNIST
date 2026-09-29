@@ -1,4 +1,16 @@
 import os
+import warnings
+
+os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
+os.environ["TF_ENABLE_ONEDNN_OPTS"] = "0"
+warnings.filterwarnings("ignore")
+
+import logging
+import absl.logging
+
+absl.logging.set_verbosity(absl.logging.ERROR)
+logging.getLogger("tensorflow").setLevel(logging.ERROR)
+
 import yaml
 import numpy as np
 from sklearn.model_selection import train_test_split

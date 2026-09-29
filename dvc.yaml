@@ -29,13 +29,13 @@ stages:
       - train.epochs
       - train.batch_size
     outs:
-      - models/model.h5
-
+      - models/model.keras 
+      
   evaluate:
     cmd: python src/evaluate.py
     deps:
       - data/processed
-      - models/model.h5
+      - models/model.keras
       - src/evaluate.py
     metrics:
       - metrics.json:

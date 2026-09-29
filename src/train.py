@@ -1,5 +1,18 @@
 import os
+import warnings
+
+os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
+os.environ["TF_ENABLE_ONEDNN_OPTS"] = "0"
+warnings.filterwarnings("ignore")
+
+import logging
+import absl.logging
+
+absl.logging.set_verbosity(absl.logging.ERROR)
+logging.getLogger("tensorflow").setLevel(logging.ERROR)
+
 import yaml
+import keras
 import numpy as np
 import pandas as pd
 import tensorflow as tf
@@ -15,7 +28,8 @@ def train():
     x_val, y_val = data["x_val"], data["y_val"]
 
     model = models.Sequential([
-        layers.Flatten(input_shape=(28, 28)),
+        layers.Input(shape=(28, 28)),
+        layers.Flatten(),
         layers.Dense(params["dense_units"], activation="relu"),
         layers.Dropout(params["dropout_rate"]),
         layers.Dense(10, activation="softmax")
@@ -34,9 +48,9 @@ def train():
         batch_size=params["batch_size"]
     )
 
-    model.save("models/model.h5")
+    model.save("models/model.keras")
     pd.DataFrame(history.history).to_csv("models/history.csv", index=False)
-    print("Model saved to models/model.h5 and training history to models/history.csv")
+    print("Model saved to models/model.keras and training history to models/history.csv")
 
 if __name__ == "__main__":
     train()
