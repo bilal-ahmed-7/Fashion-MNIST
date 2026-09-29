@@ -5,5 +5,5 @@ __pycache__/
 *.npy
 *.npz
 .dvc/tmp
-
+dvc-secret.json
 /models
