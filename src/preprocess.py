@@ -41,3 +41,4 @@ def preprocess():
 
 if __name__ == "__main__":
     preprocess()
+# Teammate modification: Standard scaling normalization note
