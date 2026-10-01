@@ -50,15 +50,15 @@ stages:
     params:
       params.yaml:
         train.batch_size: 64
-        train.dense_units: 128
+        train.dense_units: 256
         train.dropout_rate: 0.2
         train.epochs: 5
         train.learning_rate: 0.001
     outs:
     - path: models/model.keras
       hash: md5
-      md5: 3a50fa10c985a6c8acc6af74dd105ce2
-      size: 1246668
+      md5: 835ee9cab101f0538f0cd03751a8bc00
+      size: 2467788
   evaluate:
     cmd: python src/evaluate.py
     deps:
@@ -69,8 +69,8 @@ stages:
       nfiles: 1
     - path: models/model.keras
       hash: md5
-      md5: 3a50fa10c985a6c8acc6af74dd105ce2
-      size: 1246668
+      md5: 835ee9cab101f0538f0cd03751a8bc00
+      size: 2467788
     - path: src/evaluate.py
       hash: md5
       md5: cec150e894a96537b6f0c7fd95d0b601
@@ -78,5 +78,5 @@ stages:
     outs:
     - path: metrics.json
       hash: md5
-      md5: 1085975b2a84e78ac10fb778122b82b9
+      md5: 3bc0a051a4fbcec2095b3ec00d72510e
       size: 83
